@@ -25,6 +25,18 @@ class AntennaDao {
 		$returnValue=$this->utils->execQuery($query,$params);
 		return $returnValue[0];
 	}
+	
+	public function saveAntenna($antenna) {
+		$query="INSERT INTO antenna(name, zone, latitude, longitude)
+    				VALUES (:name, :zone, :latitude, :longitude)	";
+		$params=array();
+		$params[':name']=$antenna->name;
+		$params[':zone']=$antenna->zone;
+		$params[':latitude']=$antenna->latitude;
+		$params[':longitude']=$antenna->longitude;
+		
+		return $this->utils->execQuery($query,$params);
+	}
 }
 
 ?>

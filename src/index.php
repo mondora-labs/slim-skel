@@ -1,10 +1,6 @@
 <?php
 require '../vendor/autoload.php';
 require 'MyAutoloader.php';
-// $path='/Users/matteo/work/workspace/h3g/slim-skel/src/';
-// require_once $path.'controller/AntennaController.php';
-// require_once $path.'controller/Utils.php';
-// require_once $path.'dao/AntennaDao.php';
 
 // Prepare app
 $app = new \Slim\Slim(array(
@@ -38,19 +34,40 @@ $app->get('/', function () use ($app) {
     $app->render('index.html');
 });
 
-// Api example
+// Get All Antenna
 $app->get('/antenna/', function()  {
 	$antennaController=new src\controller\AntennaController;
 	$antennas=$antennaController->getAllAntenna();
 	echo json_encode($antennas,JSON_PRETTY_PRINT);
 });
 
-// Api example
+// Get Antenna By Id
 $app->get('/antenna/:id', function($id)  {
 	$antennaController=new src\controller\AntennaController();
 	$antennas=$antennaController->getAntennaById($id);
 	echo json_encode($antennas,JSON_PRETTY_PRINT);
 });
+
+// Create Antenna
+$app->post('/antenna', function() use ($app) {
+	$request = $app->request();
+	$body = $request->getBody();
+	$input = json_decode($body);
+
+	$antennaController = new src\controller\AntennaController();
+	$antennas = $antennaController->saveAntenna($input);
+	//$menus=$menuController->createMenu();
+	echo print_r($input,true);
+});
+	
+
+// Get All Menu
+$app->get('/menu', function()  {
+	$menuController=new src\controller\MenuController();
+	$menus=$menuController->getAllMenu();
+	echo json_encode($menus,JSON_PRETTY_PRINT);
+});
+
 
 // Run app
 $app->run();

@@ -20,6 +20,10 @@ class AntennaController {
 		return $antennas;
 	}
 	
+	public function saveAntenna($antenna) {
+		$this->antennaDao->saveAntenna($antenna);
+	}
+	
 }
 
 ?>

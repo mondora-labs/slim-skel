@@ -1,4 +1,5 @@
 <?php
+
 class MyAutoloader {
 	public static function loader($class) {
 		$completePath='/Users/matteo/work/workspace/h3g/slim-skel/'. str_replace ( '\\', '/', $class ) . '.php';
