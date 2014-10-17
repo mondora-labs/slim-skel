@@ -2,6 +2,7 @@
 
 namespace src\controller;
 
+use src\config\Config;
 /**
  * Classe di utilita'.
  * Da utilizzare con il metodo getInstance anziche' usare il costruttore (pattern Singleton).
@@ -18,15 +19,17 @@ class Utils {
 	private $wsConfig;
 	/** Connessione adl DB */
 	private $dbConnection;
-	private $PDO_CONNECTION_DSN="pgsql:host=localhost;dbname=corso";
-	private $PDO_CONNECTION_USER="postgres";
-	private $PDO_CONNECTION_PASSWORD="postgres";
+	private $PDO_CONNECTION_DSN="";
+	private $PDO_CONNECTION_USER="";
+	private $PDO_CONNECTION_PASSWORD="";
 	
 	
 	/** Costruttore privato per SINGLETON */
 	private function __construct() {
 		/* Non richiamare dall'esterno. Usare Utils::getInstance() */
-		//$this->wsConfig=new WsConfig();
+		$this->PDO_CONNECTION_DSN = Config::$PDO_CONNECTION_DSN;
+		$this->PDO_CONNECTION_USER = Config::$PDO_CONNECTION_USER;
+		$this->PDO_CONNECTION_PASSWORD = Config::$PDO_CONNECTION_PASSWORD;
 	}
 
 	/**
@@ -83,6 +86,7 @@ class Utils {
 			return $q->rowCount();
 		}
 		$q->setFetchMode(\PDO::FETCH_ASSOC);
+		
 		
 		return $q->fetchAll();
 	}

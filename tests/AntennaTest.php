@@ -1,8 +1,14 @@
 <?php
-class AntennaTest extends PHPUnit_Framework_TestCase {
+
+namespace tests;
+
+use src\controller\AntennaController;
+class AntennaTest extends \PHPUnit_Framework_TestCase {
 	
 	public function testAntenna() {
-		$this->assertTrue(0==0);
+		$controller=new AntennaController();
+		$antennas=$controller->getAllAntenna();
+		$this->assertTrue($antennas>=2);
 	}
 	
 }

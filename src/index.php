@@ -42,7 +42,7 @@ $app->get('/antenna/', function()  {
 });
 
 // Get Antenna By Id
-$app->get('/antenna/:id', function($id)  {
+$app->get('/antenna/:id/:data', function($id,$data)  {
 	$antennaController=new src\controller\AntennaController();
 	$antennas=$antennaController->getAntennaById($id);
 	echo json_encode($antennas,JSON_PRETTY_PRINT);
@@ -70,4 +70,6 @@ $app->get('/menu', function()  {
 
 
 // Run app
+zray_disable(); // Disabilita barra ZendServer. Serve solo se si ha ZendServer
+
 $app->run();
